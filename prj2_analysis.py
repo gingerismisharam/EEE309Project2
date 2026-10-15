@@ -11,7 +11,7 @@ multimeter = np.array([
 
 experiment1 = np.array([
     0, 80, 162, 244, 325, 413, 492,
-    572, 655, 739, 820, 909, 990, 1024
+    572, 655, 739, 820, 909, 990, 1023
 ])
 
 experiment2 = np.array([
@@ -80,9 +80,9 @@ plt.savefig("Figure11.png", dpi=300)
 
 # Approximate endpoint INL analysis
 
-# Experiment 1: exclude invalid ADC value 1024
-v1 = multimeter[:-1]
-adc1 = experiment1[:-1]
+# Experiment 1:
+v1 = multimeter
+adc1 = experiment1
 
 # Endpoint reference lines
 ref1 = adc1[0] + (
@@ -106,7 +106,8 @@ for number, voltage, inl in [
 ]:
     plt.figure(figsize=(8, 5))
     plt.plot(voltage, inl, "o-",
-             label=f"Experiment {number}")
+         color="blue" if number == 1 else "red",
+         label=f"Experiment {number}")
     plt.axhline(0, color="black",
                 linestyle="--", label="Reference")
     plt.xlabel("Multimeter Voltage (V)")
